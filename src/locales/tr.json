@@ -1,0 +1,278 @@
+{
+  "pages": {
+    "login": {
+      "title": "Hesabınıza giriş yapın",
+      "signin": "Giriş yap",
+      "signup": "Kayıt ol",
+      "email": "E-posta",
+      "password": "Şifre",
+      "remember": "Beni hatırla",
+      "forgotPassword": "Şifremi unuttum?",
+      "divider": "or",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address",
+        "requiredEmail": "Email is required",
+        "requiredPassword": "Password is required"
+      },
+      "buttons": {
+        "submit": "Login",
+        "forgotPassword": "Forgot password?",
+        "noAccount": "Don’t have an account?",
+        "rememberMe": "Remember me"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "fields": {
+        "email": "Email"
+      },
+      "errors": {
+        "validEmail": "Invalid email address",
+        "requiredEmail": "Email is required"
+      },
+      "buttons": {
+        "submit": "Send reset instructions"
+      }
+    },
+    "register": {
+      "title": "Sign up for your account",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address",
+        "requiredEmail": "Email is required",
+        "requiredPassword": "Password is required"
+      },
+      "buttons": {
+        "submit": "Register",
+        "haveAccount": "Have an account?"
+      }
+    },
+    "updatePassword": {
+      "title": "Update password",
+      "fields": {
+        "password": "New Password",
+        "confirmPassword": "Confirm new password"
+      },
+      "errors": {
+        "confirmPasswordNotMatch": "Passwords do not match",
+        "requiredPassword": "Password required",
+        "requiredConfirmPassword": "Confirm password is required"
+      },
+      "buttons": {
+        "submit": "Update"
+      }
+    },
+    "error": {
+      "info": "You may have forgotten to add the {{action}} component to {{resource}} resource.",
+      "404": "Sorry, the page you visited does not exist.",
+      "resource404": "Are you sure you have created the {{resource}} resource.",
+      "backHome": "Back Home"
+    },
+    "users": {
+      "list": {
+        "title": "Kullanıcılar"
+      }
+    },
+    "complaints": {
+      "list": {
+        "title": "Şikayetler"
+      }
+    }
+  },
+  "breadcrumb": {
+    "pages": {
+      "users": "Kullanıcılar",
+      "blog_posts": "Blog Yazıları",
+      "categories": "Kategoriler",
+      "complaints": "Şikayetler"
+    }
+  },
+  "actions": {
+    "list": "Liste",
+    "create": "Oluştur",
+    "edit": "Düzenle",
+    "show": "Göster",
+    "delete": "Sil",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "search": "Ara",
+    "logout": "Çıkış"
+  },
+  "buttons": {
+    "submit": "Gönder",
+    "create": "Create",
+    "save": "Save",
+    "logout": "Logout",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "confirm": "Are you sure?",
+    "filter": "Filter",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "show": "Show",
+    "undo": "Undo",
+    "import": "Import",
+    "clone": "Clone",
+    "notAccessTitle": "You don't have permission to access"
+  },
+  "warnWhenUnsavedChanges": "Çıkmak istediğinizden emin misiniz? Kaydedilmemiş değişiklikler var.",
+  "datepicker": {
+    "today": "Bugün",
+    "clear": "Temizle"
+  },
+  "notifications": {
+    "success": "Başarılı",
+    "error": "Beklenmeyen bir hata oluştu",
+    "undoable": "{{seconds}} saniye içinde geri alınabilir",
+    "createSuccess": "Başarılı bir şekilde oluşturuldu",
+    "createError": "Oluşturma işlemi sırasında bir hata oluştu",
+    "deleteSuccess": "Başarıyla silindi",
+    "deleteError": "Silme işlemi sırasında bir hata oluştu",
+    "editSuccess": "Başarıyla düzenlendi",
+    "editError": "Düzenleme işlemi sırasında bir hata oluştu",
+    "importProgress": "Importing: {{processed}}/{{total}}"
+  },
+  "loading": "Loading",
+  "tags": {
+    "clone": "Clone"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "posts": {
+    "posts": "Posts",
+    "fields": {
+      "id": "Id",
+      "title": "Title",
+      "category": "Category",
+      "status": {
+        "title": "Status",
+        "published": "Published",
+        "draft": "Draft",
+        "rejected": "Rejected"
+      },
+      "content": "Content",
+      "createdAt": "Created At"
+    },
+    "titles": {
+      "create": "Create Post",
+      "edit": "Edit Post",
+      "list": "Posts",
+      "show": "Show Post"
+    }
+  },
+  "table": {
+    "actions": "İşlemler",
+    "search": "Ara...",
+    "next": "Sonraki",
+    "previous": "Önceki"
+  },
+  "documentTitle": {
+    "default": "vogium",
+    "suffix": " | Vogium",
+    "users": {
+      "list": "Users | Vogium",
+      "show": "#{{id}} Show User | Vogium",
+      "edit": "#{{id}} Edit User | Vogium",
+      "create": "Create new User | Vogium",
+      "clone": "#{{id}} Clone User | Vogium"
+    }
+  },
+  "autoSave": {
+    "success": "saved",
+    "error": "auto save failure",
+    "loading": "saving...",
+    "idle": "waiting for changes"
+  },
+  "resources": {
+    "users": {
+      "name": "Kullanıcı",
+      "tabs": {
+        "profile": "Profil",
+        "reports": "Şikayetler",
+        "offers": "Teklifler",
+        "contracts": "Sözleşmeler"
+      },
+      "groups": {
+        "basicInformation": "Temel Bilgiler",
+        "accountStatusAndType": "Hesap Durumu ve Türü",
+        "socialAndStatisticalInformation": "Sosyal ve İstatistiksel Bilgiler",
+        "accountInteractions": "Hesap Etkileşimleri"
+      },
+      "fields": {
+        "id": "Id",
+        "realname": "Ad",
+        "username": "Kullanıcı Adı",
+        "age": "Yaş",
+        "gender": "Cinsiyet",
+        "terms": "Şartlar ve Koşullar",
+        "phoneNumber": "Telefon Numarası",
+        "emailAddress": "E-posta Adresi",
+        "male": "Erkek",
+        "female": "Kadın",
+        "birthDate": "Doğum Günü",
+        "country": "Ülke",
+        "city": "Şehir",
+        "accountType": "Hesap Türü",
+        "status": "userStatus",
+        "userType": "Kullanıcı Türü",
+        "userStatus": "Kullanıcı Durumu",
+        "isBanned": "Banlı mı?",
+        "banDate": "Ban Tarihi",
+        "expireBanDate": "Ban Bitiş Tarihi",
+        "isAccountVerified": "Hesap Doğrulandı mı?",
+        "isEmailVerified": "E-posta Doğrulandı mı?",
+        "isPhoneVerified": "Telefon Doğrulandı mı?",
+        "followerCount": "Takipçi Sayısı",
+        "followingCount": "Takip Edilen Sayısı",
+        "subscriberCount": "Abone Sayısı",
+        "subscriptionCount": "Aboneliği Sayısı",
+        "totalExpenditure": "Toplam Harcama",
+        "lastLoginDate": "Son Giriş Tarihi",
+        "lastLogoutDate": "Son Çıkış Tarihi",
+        "vogCount": "Vog Sayısı",
+        "vogLikeCount": "Vog Beğeni Sayısı",
+        "postCommentCount": "Yorum Sayısı",
+        "favoriteBusinessCount": "Favori İşletme Sayısı",
+        "blogsReadCount": "Okunan Blog Sayısı",
+        "blogsLikeCount": "Beğenilen Blog Sayısı"
+      }
+    },
+    "complaints": {
+      "name": "Şikayetler",
+      "fields": {
+        "id": "Id",
+        "type": "Şikayet Türü",
+        "reportTitle": "Şikayet Başlığı",
+        "reportDescription": "Şikayet İçeriği",
+        "reportNote": "Şikayet Notu",
+        "date": "Şikayet Tarihi",
+        "reportStatus": "Şikayet Durumu"
+      }
+    },
+    "blog_posts": {
+      "name": "Blog Yazısı",
+      "fields": {
+        "id": "Id",
+        "title": "Başlık",
+        "content": "İçerik",
+        "status": "Durum"
+      }
+    }
+  },
+  "enums": {
+    "reportTypes": {
+      "vog": "Vog",
+      "comment": "Yorum",
+      "user": "User"
+    }
+  }
+}

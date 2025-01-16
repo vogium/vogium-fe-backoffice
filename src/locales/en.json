@@ -1,0 +1,74 @@
+{
+  "pages": {
+    "login": {
+      "title": "Sign in to your account",
+      "signin": "Sign in",
+      "signup": "Sign up",
+      "email": "Email",
+      "password": "Password",
+      "remember": "Remember me",
+      "forgotPassword": "Forgot password?"
+    },
+    "error": {
+      "info": "You may have forgotten to add the {{resource}} component to {{code}} file.",
+      "404": "Sorry, the page you visited does not exist."
+    }
+  },
+  "actions": {
+    "list": "List",
+    "create": "Create",
+    "edit": "Edit",
+    "show": "Show",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "logout": "Logout"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "create": "Create",
+    "save": "Save",
+    "logout": "Logout",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
+  "resources": {
+    "user": {
+      "name": "User",
+      "fields": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status"
+      }
+    },
+    "blog_posts": {
+      "name": "Blog Post",
+      "fields": {
+        "id": "ID",
+        "title": "Title",
+        "content": "Content",
+        "status": "Status"
+      }
+    },
+    "categories": {
+      "name": "Category",
+      "fields": {
+        "id": "ID",
+        "title": "Title",
+        "status": "Status"
+      }
+    }
+  },
+  "table": {
+    "actions": "Actions"
+  },
+  "menu": {
+    "users": "Users",
+    "blog_posts": "Blog Posts",
+    "categories": "Categories"
+  }
+}
