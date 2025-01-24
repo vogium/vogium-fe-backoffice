@@ -37,6 +37,7 @@ import { ToastContainer } from "react-toastify";
 import { TokenProvider } from "./contexts/TokenContext";
 import { i18nProvider } from "./providers/i18nProvider";
 import { ComplaintList } from "./pages/complaints";
+import { VogList, VogShow } from "./pages/vog";
 
 function App() {
   return (
@@ -125,6 +126,17 @@ function App() {
                     canDelete: true,
                   },
                 },
+                {
+                  name: "vogs",
+                  list: "/vogs",
+                  //create: "/vog/create",
+                  //edit: "/vog/edit/:id",
+                  show: "/vogs/show/:id",
+                  meta: {
+                    label: "vogs",
+                    canDelete: false,
+                  },
+                },
               ]}
               options={{
                 reactQuery: {
@@ -180,6 +192,10 @@ function App() {
                     <Route path="create" element={<CategoryCreate />} />
                     <Route path="edit/:id" element={<CategoryEdit />} />
                     <Route path="show/:id" element={<CategoryShow />} />
+                  </Route>
+                  <Route path="vogs">
+                    <Route index element={<VogList />} />
+                    <Route path="show/:id" element={<VogShow />} />
                   </Route>
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
