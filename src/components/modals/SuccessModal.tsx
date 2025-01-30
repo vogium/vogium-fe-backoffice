@@ -7,7 +7,6 @@ export default function SuccessModal({
   isOpen,
   onClose,
   title,
-
   onConfirm,
   confirmText,
   cancelText,

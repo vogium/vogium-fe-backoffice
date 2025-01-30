@@ -10,8 +10,7 @@ import {
   useNotification,
   useTranslate,
 } from "@refinedev/core";
-import PageSpinner from "../../components/spinner/PageSpinner";
-import paginationLibrary from "../../lib/paginationLibrary";
+import paginationLibrary from "../../hooks/usePagination";
 import usePaginationResponse from "../../hooks/usePaginationResponse";
 import { IUser } from "../../types/IUser";
 import { IResponsePaginatedList } from "../../types/IResponse";
@@ -134,8 +133,6 @@ export const ComplaintList = () => {
   >(response, paginationInstance);
   return (
     <div style={{ padding: "16px" }}>
-      <PageSpinner isLoading={isLoading} />
-
       <div className="flex w-full mb-7 justify-between">
         <h2 className="font-bold text-xl">
           {translate("pages.complaints.list.title")}

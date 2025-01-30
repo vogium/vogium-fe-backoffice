@@ -11,5 +11,8 @@ export const TabPanel: React.FC<TabPanelProps> = ({
   value,
   index,
 }) => {
-  return <div className={value === index ? "block" : "hidden"}>{children}</div>;
+  if (value !== index) {
+    return null;
+  }
+  return <div>{children}</div>;
 };

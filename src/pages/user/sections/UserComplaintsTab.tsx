@@ -1,22 +1,35 @@
 import { useTranslate } from "@refinedev/core";
-import SuccessButton from "../../../components/buttons/SuccessButton";
-import SuccessModal from "../../../components/modals/SuccessModal";
 import { Table } from "../../../components/table/Table";
 import { IReport } from "../../../types/IReport";
 import { IColumn } from "../../../types/ITable";
-import { getReportTypeLabel, ReportType } from "../../../enums/ReportEnums";
 import {
-  getReportStatusLabel,
+  getReportTypeOption,
+  ReportType,
+} from "../../../enums/report/report-types.enum";
+import {
+  getReportStatusOption,
   ReportStatus,
-} from "../../../enums/ReportStatusEnum";
+} from "../../../enums/report/report-status.enum";
 import TableShowButton from "../../../components/table/TableShowButton";
 import TableDeleteButton from "../../../components/table/TableDeleteButton";
-import paginationLibrary from "../../../lib/paginationLibrary";
-import React from "react";
+import paginationLibrary from "../../../hooks/usePagination";
+import dummyComplaints from "../../../data/dummyComplaints.json";
+import { useCommonStates } from "../../../hooks/useCommonStates";
+import {
+  getReportTitleOption,
+  ReportTitle,
+} from "../../../enums/report/report-title.enum";
+import {
+  getReportDescriptionOption,
+  ReportDescription,
+} from "../../../enums/report/report-description.enum";
+import UserComplaintTabView from "./UserComplaintTabView";
 
 export default function UserComplaintsTab() {
   const translate = useTranslate();
-  const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
+  const { isDetailsModalOpen, setIsDetailsModalOpen, values, setValues } =
+    useCommonStates<IReport>();
+
   const paginationInstanceReport = paginationLibrary<IReport>();
 
   const reportColumns: IColumn<IReport>[] = [
@@ -28,19 +41,29 @@ export default function UserComplaintsTab() {
       key: "type",
       header: translate("resources.complaints.fields.type"),
       render: (_, value) => {
-        return translate(
-          "resources.enums.reportTypes." +
-            getReportTypeLabel(value.type as ReportType)
-        );
+        const reportTypeOption = getReportTypeOption(value.type as ReportType);
+        return translate(reportTypeOption?.label || "");
       },
     },
     {
       key: "reportTitle",
       header: translate("resources.complaints.fields.reportTitle"),
+      render: (_, value) => {
+        const reportTitleOption = getReportTitleOption(
+          value.reportTitle as ReportTitle
+        );
+        return translate(reportTitleOption?.label || "");
+      },
     },
     {
       key: "reportDescription",
       header: translate("resources.complaints.fields.reportDescription"),
+      render: (_, value) => {
+        const reportDescriptionOption = getReportDescriptionOption(
+          value.reportDescription as ReportDescription
+        );
+        return translate(reportDescriptionOption?.label || "");
+      },
     },
     {
       key: "reportNote",
@@ -49,14 +72,21 @@ export default function UserComplaintsTab() {
     {
       key: "date",
       header: translate("resources.complaints.fields.date"),
+      render: (field) => {
+        return <div className="w-fit">{field}</div>;
+      },
     },
     {
       key: "reportStatus",
       header: translate("resources.complaints.fields.reportStatus"),
       render: (_, value) => {
-        return translate(
-          "resources.enums.reportStatus." +
-            getReportStatusLabel(value.reportStatus as ReportStatus)
+        const reportStatusOption = getReportStatusOption(
+          value.reportStatus as ReportStatus
+        );
+        return (
+          <div className={reportStatusOption?.style}>
+            {translate(reportStatusOption?.label || "")}
+          </div>
         );
       },
     },
@@ -67,8 +97,9 @@ export default function UserComplaintsTab() {
         <span className="flex justify-center items-center gap-3">
           <TableShowButton
             onClick={() => {
-              // show("users", row.authId);
               console.log("show row", row);
+              setValues(row);
+              setIsDetailsModalOpen(true);
             }}
           />
           <TableDeleteButton
@@ -83,46 +114,20 @@ export default function UserComplaintsTab() {
     },
   ];
 
-  const handleSubmit = () => {
-    console.log("clicked create in complaints tab");
-    setIsCreateModalOpen(false);
-  };
+  if (isDetailsModalOpen && values) {
+    return (
+      <UserComplaintTabView
+        complaint={values}
+        setIsDetailsModalOpen={setIsDetailsModalOpen}
+      />
+    );
+  }
 
   return (
     <>
-      <SuccessButton
-        title={translate("actions.create")}
-        onClickAction={(e: React.FormEvent) => {
-          // console.log("clicked sabe", formData);
-          console.log("clicked create in complaints tab");
-          setIsCreateModalOpen(true);
-          // handleSubmit(e, userUpdateSchema);
-        }}
-        parentClassName="w-full flex justify-end my-3"
-        className="w-1/6"
-      />
-
-      <SuccessModal
-        title="Başarılı"
-        isOpen={isCreateModalOpen}
-        onClose={() => {
-          setIsCreateModalOpen(false);
-        }}
-        onConfirm={() => {
-          handleSubmit();
-        }}
-        confirmText="Tamam"
-        cancelText="İptal"
-      >
-        Butona tıklandığında bir form görüntülenir ve şu bilgiler
-        doldurulabilir: Şikayet Eden: Kullanıcı adı veya ID. Şikayet Türü:
-        Kullanıcı, Gönderi veya Yorum. Şikayet Edilen: Kullanıcı adı, gönderi ID
-        veya yorum ID. Şikayet Açıklaması: Şikayetin kısa özeti.
-        <div> input alanı</div>
-      </SuccessModal>
       <Table<IReport>
         columns={reportColumns}
-        rows={[]}
+        rows={dummyComplaints as IReport[]}
         paginationInstance={paginationInstanceReport}
         isSearchable={true}
       />

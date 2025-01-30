@@ -11,6 +11,5 @@ export interface IFormTab {
   label: string;
   onSubmit?: (values: Record<string, unknown>) => void;
   isVisible?: boolean;
-  // fields: IFormField[];
   groups: IGroup[];
 }

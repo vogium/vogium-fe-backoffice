@@ -10,8 +10,7 @@ import {
   useNotification,
   useTranslate,
 } from "@refinedev/core";
-import PageSpinner from "../../components/spinner/PageSpinner";
-import paginationLibrary from "../../lib/paginationLibrary";
+import paginationLibrary from "../../hooks/usePagination";
 import usePaginationResponse from "../../hooks/usePaginationResponse";
 import { IUser } from "../../types/IUser";
 import { IResponsePaginatedList } from "../../types/IResponse";
@@ -19,6 +18,7 @@ import { useGenericState } from "../../hooks/useGenericState";
 import WarningModal from "../../components/modals/WarningModal";
 import SuccessButton from "../../components/buttons/SuccessButton";
 import { IPaginationLibrary } from "../../types/IPagination";
+import { API_ROUTES } from "../../contants/apiRoutes";
 
 export const UserList = () => {
   const translate = useTranslate();
@@ -97,7 +97,8 @@ export const UserList = () => {
     isLoading,
     isError,
   } = useList<IResponsePaginatedList<IUser>>({
-    resource: "user/find/all",
+    // resource: "user/find/all",
+    resource: API_ROUTES.USERS.GET.ALL_WITH_PAGINATION,
     pagination: {
       current: paginationInstance.currentPage,
       pageSize: paginationInstance.pageSize,
@@ -132,10 +133,9 @@ export const UserList = () => {
     IUser,
     GetListResponse<IResponsePaginatedList<IUser>> | undefined
   >(response, paginationInstance);
+
   return (
     <div style={{ padding: "16px" }}>
-      <PageSpinner isLoading={isLoading} />
-
       <div className="flex w-full mb-7 justify-between">
         <h2 className="font-bold text-xl">
           {translate("pages.users.list.title")}

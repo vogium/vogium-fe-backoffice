@@ -1,13 +1,12 @@
 // src/hooks/useCommonStates.js
-import { useEffect, useState } from "react";
+import { BaseRecord } from "@refinedev/core";
+import React, { useEffect, useState } from "react";
 import * as yup from "yup";
+import { validateFormAgainstSchema } from "../lib/formValidator";
+import { IGroup } from "../types/IFormTabs";
 
-export function useCommonStates<TFormValues>({
-  formValues,
-}: {
-  formValues?: TFormValues;
-}) {
-  const [listOptions, setListOptions] = useState<Record<string, unknown>[]>([]);
+export function useCommonStates<TFormValues extends BaseRecord>() {
+  const [listOptions, setListOptions] = useState<BaseRecord[]>([]);
   const [selectedListOption, setSelectedListOption] = useState<number | null>(
     null
   );
@@ -15,11 +14,14 @@ export function useCommonStates<TFormValues>({
     string,
     string
   > | null>(null);
-  const [values, setValues] = useState<TFormValues | null>(null);
-  const [originalValues, setOriginalValues] = useState(
-    JSON.parse(JSON.stringify(formValues || {}))
-  );
+  const [values, setValues] = useState<TFormValues>();
+  const [originalValues, setOriginalValues] = useState<TFormValues>();
   const [isDirty, setIsDirty] = useState(false);
+  const [dirtyValues, setDirtyValues] = useState<TFormValues>();
+  const [loadingState, setLoadingState] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     const settingDirty =
@@ -27,57 +29,103 @@ export function useCommonStates<TFormValues>({
     setIsDirty(settingDirty);
   }, [values, originalValues]);
 
-  const setOriginalData = ({ fetchedData }: any) => {
+  const setOriginalData = React.useCallback((fetchedData: TFormValues) => {
+    if (!fetchedData) {
+      return;
+    }
     setOriginalValues(JSON.parse(JSON.stringify(fetchedData)));
-  };
+    setValues(JSON.parse(JSON.stringify(fetchedData)));
+    setDirtyValues(undefined);
+  }, []);
 
   //schema is yup schema
   const validateForm = ({
+    body = values,
     schema,
-    body,
     successCallback,
+    errorCallBack,
   }: {
-    schema: yup.ObjectSchema<any>;
     body: any;
-    successCallback: () => void;
+    schema: yup.ObjectSchema<any>;
+    successCallback?: () => void;
+    errorCallBack?: (errors: any) => void;
   }) => {
-    try {
-      schema.validateSync(body, { abortEarly: false });
-      successCallback();
-      setValidationMessages({});
-      return { isValid: true, errors: {} };
-    } catch (error: any) {
-      const errors: any = {};
+    return validateFormAgainstSchema({
+      body,
+      schema,
+      successCallback,
+      setValidationMessages,
+      errorCallBack,
+    });
+  };
 
-      // error.inner'da bulunan her hata için işlem yapıyoruz
-      error.inner.forEach((err: any) => {
-        // Şemada olmayan alanlar için özel hata mesajı
-        if (err.path === "") {
-          const unknownFields = err.errors[0].match(
-            /this field has unspecified keys: (.*)/
-          );
-          if (unknownFields) {
-            const fields = unknownFields[1].split(", ");
-            fields.forEach((field: any) => {
-              errors[
-                field
-              ] = `Field "${field}" is not allowed, value: ${body[field]}`;
-            });
-          }
-        } else {
-          // Şemada tanımlı alanlar için standart hata mesajı
-          errors[err.path] = err.message;
+  const handleFieldChange = (id: keyof TFormValues, value: unknown) => {
+    setValues((prev) => ({ ...prev, [id]: value } as TFormValues));
+
+    handleDirtyFieldChange(id, value);
+  };
+
+  const handleDirtyFieldChange = (id: keyof TFormValues, value: unknown) => {
+    //check if it is same with original value
+    if (!originalValues) return;
+    const isDirty =
+      JSON.stringify(originalValues[id]) !== JSON.stringify(value);
+
+    setDirtyValues((prev) => {
+      if (isDirty) {
+        // Add or update field if different from original
+        return { ...prev, [id]: value } as TFormValues;
+      } else {
+        // Remove field if same as original
+        const newDirtyValues = { ...prev };
+        delete (newDirtyValues as any)[id];
+        return Object.keys(newDirtyValues).length
+          ? (newDirtyValues as TFormValues)
+          : undefined;
+      }
+    });
+  };
+
+  const generateInitialValues = (groups: IGroup[]) => {
+    const initialValues: Record<string, any> = {};
+
+    groups.forEach((group) => {
+      group.fields.forEach((field) => {
+        switch (field.type) {
+          case "text":
+          case "textarea":
+          case "email":
+            initialValues[field.id] = "";
+            break;
+          case "number":
+            initialValues[field.id] = 0;
+            break;
+          case "select":
+            initialValues[field.id] = field.isClearable ? null : "";
+            break;
+          case "checkbox":
+            initialValues[field.id] = false;
+            break;
+          case "document":
+            initialValues[field.id] = field.isMulti ? [] : null;
+            break;
+          case "datePicker":
+            initialValues[field.id] = null;
+            break;
+          default:
+            initialValues[field.id] = null;
         }
       });
+    });
 
-      console.log("validation errors :>> ", errors);
-      setValidationMessages(errors);
+    setValues(initialValues as TFormValues);
 
-      return { isValid: false, errors };
-    }
+    return initialValues;
   };
 
   return {
+    loadingState,
+    setLoadingState,
     validationMessages,
     setValidationMessages,
     listOptions,
@@ -87,10 +135,19 @@ export function useCommonStates<TFormValues>({
     values,
     setValues,
     originalValues,
-    setOriginalValues,
+    handleFieldChange,
+    // setOriginalValues,
     isDirty,
     setIsDirty,
     setOriginalData,
     validateForm,
+    dirtyValues,
+    isDetailsModalOpen,
+    setIsDetailsModalOpen,
+    isCreateModalOpen,
+    setIsCreateModalOpen,
+    isDeleteModalOpen,
+    setIsDeleteModalOpen,
+    generateInitialValues,
   };
 }

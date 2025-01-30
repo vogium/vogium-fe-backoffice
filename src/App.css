@@ -6,6 +6,23 @@
   scroll-behavior: smooth;
 }
 
+/* input {
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  box-shadow: none;
+  border-radius: 20px;
+  border-color: none;
+}
+
+input:focus {
+  border: 1px solid #7f3d5b;
+  box-shadow: 0 0 0 1px #7f3d5b;
+}
+
+input:hover {
+  border: 1px solid #7f3d5b;
+} */
+
 @layer components {
   .animation-smooth-slow {
     @apply transition-all duration-500 ease-in-out;
@@ -20,7 +37,15 @@
   }
 
   .danger-input {
-    @apply bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500;
+    @apply bg-red-50 border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg  dark:bg-gray-700  block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 !important;
+  }
+
+  .danger-input:focus {
+    @apply shadow-red-500  !important;
+  }
+
+  .danger-input:hover {
+    @apply ring-red-500 border-red-500 !important;
   }
 
   .container-adjusted {
@@ -29,6 +54,47 @@
 }
 
 @layer base {
+  /* Form select içinde olmayan input'lar için stil */
+  input:not(.react-select__input) {
+    @apply animation-smooth-fastest border border-[#e5e7eb] shadow-none rounded-md bg-white py-[8px] px-[12px] outline-none focus:ring-0 !important;
+  }
+
+  input:not(.react-select__input):focus {
+    @apply border border-[#7f3d5b] shadow-[0_0_0_1px_#7f3d5b] outline-none !important;
+  }
+
+  input:not(.react-select__input):hover {
+    @apply border border-[#7f3d5b] !important;
+  }
+
+  input:not(.react-select__input):disabled {
+    @apply bg-gray-50 text-gray-400 cursor-not-allowed border-[#c9cbcf] !important;
+  }
+
+  input:not(.react-select__input):checked {
+    @apply bg-[#7f3d5b] border-[#7f3d5b] !important;
+  }
+
+  textarea {
+    @apply animation-smooth-fastest border border-[#e5e7eb] shadow-none rounded-md bg-white outline-none focus:ring-0 py-[8px] px-[12px] !important;
+  }
+
+  textarea:focus {
+    @apply border border-[#7f3d5b] shadow-[0_0_0_1px_#7f3d5b] outline-none !important;
+  }
+
+  textarea:hover {
+    @apply border border-[#7f3d5b] !important;
+  }
+
+  textarea:disabled {
+    @apply bg-gray-50 text-gray-400 cursor-not-allowed border-[#c9cbcf] !important;
+  }
+
+  textarea:checked {
+    @apply bg-[#7f3d5b] border-[#7f3d5b] !important;
+  }
+
   cursor-pointer {
     cursor: pointer;
   }

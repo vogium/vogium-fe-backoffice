@@ -3,6 +3,7 @@ import { Breadcrumb } from "../breadcrumb";
 import { Menu } from "../menu";
 import { LanguageSwitcher } from "../language-switcher";
 import { useLogout, useTranslate } from "@refinedev/core";
+import GlobalPageSpinner from "../spinner/GlobalPageSpinner";
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const { mutate: logout } = useLogout();
@@ -10,6 +11,8 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className="bg-background flex">
+      <GlobalPageSpinner></GlobalPageSpinner>
+
       <Menu />
 
       <div className="w-full min-h-screen overflow-auto">

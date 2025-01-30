@@ -8,6 +8,7 @@ interface PieChartProps {
   labels: string[];
   label?: string;
   height?: number;
+  onClick?: (category: string) => void;
 }
 
 export const PieChart: React.FC<PieChartProps> = ({
@@ -16,12 +17,18 @@ export const PieChart: React.FC<PieChartProps> = ({
   labels,
   label = "",
   height = 350,
+  onClick,
 }) => {
   const options: ApexOptions = {
     chart: {
       type: "pie",
       toolbar: {
         show: true,
+      },
+      events: {
+        dataPointSelection: (event, chartContext, config) => {
+          onClick?.(labels[config.dataPointIndex]);
+        },
       },
     },
     labels: labels,

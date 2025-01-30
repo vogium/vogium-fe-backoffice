@@ -1,20 +1,19 @@
-interface IButtonSkeleton {
-  // title: string;
+export interface IButtonSkeleton {
   children: React.ReactNode;
   className?: string;
   parentClassName?: string;
   onClickAction: (e: React.FormEvent) => void;
   type?: "submit" | "button" | "reset";
   isBlockState?: boolean;
-  //   styleType?: "success" | "danger" | "info" | "warning";
+  showProgress?: boolean;
 }
 
-interface IBasicButton {
+export interface IBasicButton {
   title: string;
   className?: string;
   parentClassName?: string;
   onClickAction: (e: React.FormEvent) => void;
   type?: "submit" | "button" | "reset";
   isBlockState?: boolean;
-  //   styleType?: "success" | "danger" | "info" | "warning";
+  showProgress?: boolean;
 }

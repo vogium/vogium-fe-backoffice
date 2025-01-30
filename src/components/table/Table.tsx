@@ -125,7 +125,7 @@ export function Table<T extends BaseRecord>({
           <div className="flex space-x-1">
             <button
               className={
-                "px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-black bg-white border border-custom-gray-v2/10 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease " +
+                "px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-brand bg-white border border-brand/20 rounded hover:bg-brand hover:border-brand transition duration-200 ease " +
                 (!paginationInstance.canGoPreviousPage() ? "!bg-gray-100" : "")
               }
               onClick={() => paginationInstance.goPreviousPage()}
@@ -178,11 +178,11 @@ export function Table<T extends BaseRecord>({
                         typeof page === "number" &&
                         paginationInstance.currentPage ===
                           parseInt(page.toString())
-                          ? "bg-red-500 text-white"
+                          ? "bg-gray-50 text-brand hover:bg-brand hover:text-white"
                           : "text-black bg-white hover:bg-slate-50"
                       }
 
-                    border border-custom-gray-v2/10 rounded transition duration-200 ease`}
+                    border border-brand/20 rounded transition duration-200 ease`}
                   >
                     {page}
                   </button>
@@ -191,7 +191,7 @@ export function Table<T extends BaseRecord>({
 
             <button
               className={
-                "px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-black bg-white border border-custom-gray-v2/10 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease " +
+                "px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-brand bg-white border border-brand/20 rounded hover:bg-slate-50 hover:border-brand transition duration-200 ease " +
                 (!paginationInstance.canGoPreviousPage() ? "!bg-gray-100" : "")
               }
               style={{

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "reporterId": "123",
+    "reportedId": "456",
+    "type": 1,
+    "reportTitle": 1,
+    "reportDescription": 0,
+    "reportNote": "",
+    "reportStatus": 0,
+    "date": "2024-03-15"
+  },
+  {
+    "id": "2",
+    "reporterId": "789",
+    "reportedId": "101",
+    "type": 0,
+    "reportTitle": 1,
+    "reportDescription": 1,
+    "reportNote": "Needs verification",
+    "reportStatus": 1,
+    "date": "2024-03-15"
+  },
+  {
+    "id": "3",
+    "reporterId": "112",
+    "reportedId": "131",
+    "type": 2,
+    "reportTitle": 1,
+    "reportDescription": 2,
+    "reportNote": "Escalated to finance",
+    "reportStatus": 2,
+    "date": "2024-03-15"
+  }
+]

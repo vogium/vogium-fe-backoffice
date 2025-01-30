@@ -17,23 +17,70 @@ export const LineChart: React.FC<LineChartProps> = ({
   title = "",
   className = "",
 }) => {
-  const series = [{ name: "Günlük Etkileşimler", data: dailyInteractions }];
+  const series = [
+    {
+      name: "Günlük Etkileşimler",
+      data: dailyInteractions,
+    },
+  ];
 
   const options: ApexOptions = {
     chart: {
       type: "line",
       toolbar: { show: false },
+      zoom: { enabled: false },
     },
-    xaxis: { categories: dailyLabels },
+    colors: ["#7f3d5b"], // Brand color
+    xaxis: {
+      categories: dailyLabels,
+      labels: {
+        style: {
+          colors: "#64748b", // slate-500
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: "#64748b", // slate-500
+        },
+      },
+    },
     dataLabels: { enabled: false },
-    stroke: { curve: "smooth" },
-    title: { text: "", align: "left" },
+    stroke: {
+      curve: "smooth",
+      width: 2,
+    },
+    grid: {
+      borderColor: "#e2e8f0", // slate-200
+      strokeDashArray: 4,
+    },
+    tooltip: {
+      theme: "light",
+      x: {
+        show: true,
+      },
+      y: {
+        title: {
+          formatter: () => "Etkileşim",
+        },
+      },
+    },
+    markers: {
+      size: 4,
+      colors: ["#7f3d5b"],
+      strokeColors: "#fff",
+      strokeWidth: 2,
+      hover: {
+        size: 6,
+      },
+    },
   };
 
   return (
     <div className={className}>
       <div className="mb-5">
-        <h2 className="font-bold text-lg">{title}</h2>
+        <h2 className="font-bold text-lg text-gray-800">{title}</h2>
         <ReactApexChart
           options={options}
           series={series}
@@ -42,8 +89,10 @@ export const LineChart: React.FC<LineChartProps> = ({
         />
       </div>
       <div className="mt-5">
-        <h2 className="font-bold text-lg">Ortalama Etkileşim Oranı</h2>
-        <div className="text-2xl">
+        <h2 className="font-bold text-lg text-gray-800">
+          Ortalama Etkileşim Oranı
+        </h2>
+        <div className="text-2xl text-brand">
           {(averageInteractionRatio * 100).toFixed(2)}%
         </div>
       </div>

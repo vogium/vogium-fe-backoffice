@@ -1,5 +1,7 @@
 import { AuthBindings } from "@refinedev/core";
 import { axiosInstance, setAxiosToken } from "../lib/axiosInstance";
+import { IIdentity } from "../types/IIdentity";
+import { AccountTypes } from "../enums/user/account-type.enum";
 
 let memoryToken: string | null = null;
 
@@ -98,6 +100,15 @@ export const authProvider: AuthBindings = {
   },
 
   getIdentity: async () => {
+    return {
+      authId: "asd1asd",
+      username: "John Doe",
+      email: "deneme@gmail.com",
+      emailVerified: true,
+      phoneNumber: "1234567890",
+      accountType: AccountTypes.DEVELOPER,
+    } as IIdentity;
+
     if (!memoryToken) return null;
 
     try {

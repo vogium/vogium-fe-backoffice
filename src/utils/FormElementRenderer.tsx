@@ -1,20 +1,23 @@
-import FormCheckboxElement from "../components/form/FormCheckboxElement";
-import FormDatePickerElement from "../components/form/FormDatePickerElement";
-import { FormPhoneElement } from "../components/form/FormPhoneElement";
-import FormSingleSelectElement from "../components/form/FormSingleSelectElement";
-import FormTextElement from "../components/form/FormTextElement";
+import { BaseRecord } from "@refinedev/core";
+import FormCheckboxElement from "../components/form/elements/FormCheckboxElement";
+import FormDatePickerElement from "../components/form/elements/FormDatePickerElement";
+import { FormPhoneElement } from "../components/form/elements/FormPhoneElement";
+import FormSingleSelectElement from "../components/form/elements/FormSingleSelectElement";
+import FormTextElement from "../components/form/elements/FormTextElement";
 import { IFormField } from "../types/IForm";
+import FormTextAreaElement from "../components/form/elements/FormTextAreaElement";
+import FormDocumentElement from "../components/form/elements/FormDocumentElement";
 
 interface IFormElementRendererProps {
   field: IFormField;
-  formData: Record<string, unknown>;
-  handleChange: (id: string, value: unknown) => void;
+  formData: BaseRecord;
+  handleFieldChange: (id: string, value: unknown) => void;
 }
 
 const formElementRenderer = ({
   field,
   formData,
-  handleChange,
+  handleFieldChange,
 }: IFormElementRendererProps) => {
   if (field.render) {
     return (
@@ -33,7 +36,7 @@ const formElementRenderer = ({
       formData[field.id] !== undefined
         ? formData[field.id]
         : field.defaultValue || "",
-    onChange: handleChange,
+    onChange: handleFieldChange,
     validationMessage: field.validationMessage,
   };
 
@@ -45,6 +48,7 @@ const formElementRenderer = ({
           {...commonProps}
           options={field.options || []}
           placeholder={field.placeholder}
+          isClearable={field.isClearable}
         />
       );
     case "checkbox":
@@ -56,6 +60,16 @@ const formElementRenderer = ({
           key={field.id}
           {...commonProps}
           type={field.type}
+          placeholder={field.placeholder}
+          min={field.min}
+          max={field.max}
+        />
+      );
+    case "textarea":
+      return (
+        <FormTextAreaElement
+          key={field.id}
+          {...commonProps}
           placeholder={field.placeholder}
         />
       );
@@ -80,6 +94,22 @@ const formElementRenderer = ({
           }
         />
       );
+    case "document":
+      return (
+        <FormDocumentElement
+          key={field.id}
+          {...commonProps}
+          value={
+            formData[field.id] !== undefined
+              ? String(formData[field.id]) // Convert to string
+              : undefined
+          }
+          isMulti={field.isMulti}
+          accept={field.accept}
+          maxSize={field.maxSize}
+        />
+      );
+
     case "datePicker":
       return (
         <FormDatePickerElement
@@ -91,6 +121,7 @@ const formElementRenderer = ({
               : undefined
           }
           maxDate={field.maxDate}
+          minDate={field.minDate}
         />
       );
     default:

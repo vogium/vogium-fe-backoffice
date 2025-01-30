@@ -3,21 +3,30 @@ export interface IFormField {
   label: string; // Label text
   type:
     | "text"
+    | "textarea"
     | "number"
     | "select"
     | "checkbox"
     | "custom"
     | "email"
     | "phone"
+    | "document"
     | "datePicker"; // Field type
+  colSpan: number; // Number of grid columns the field spans
   options?: { label: string; value: string | number }[]; // For select fields
   editable?: boolean; // Whether the field is editable
   defaultValue?: string | number | boolean; // Default value
   placeholder?: string; // Placeholder text
-  colSpan: number; // Number of grid columns the field spans
   render?: () => JSX.Element; // Custom render function
   validationMessage?: string; // Validation message
-  maxDate?: Date; // Maximum date for date picker
+  isClearable?: boolean; // Whether the select field is clearable
+  maxDate?: string; // Maximum date for date picker
+  minDate?: string; // Minimum date for date picker
+  isMulti?: boolean; // Whether the field accepts multiple values
+  accept?: string; // File types accepted by file input
+  maxSize?: number; // Maximum file size in MB
+  min?: number; // Minimum value for number field
+  max?: number; // Maximum value for number field
 }
 
 export interface IBaseFormElementProps {
@@ -25,8 +34,8 @@ export interface IBaseFormElementProps {
   label: string;
   colSpan: number;
   editable?: boolean;
-  value: any;
-  onChange: (id: string, value: any) => void;
+  value: unknown;
+  onChange: (id: string, value: unknown) => void;
   validationMessage?: string;
 }
 

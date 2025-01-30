@@ -11,7 +11,7 @@ import {
   useTranslate,
 } from "@refinedev/core";
 import PageSpinner from "../../components/spinner/PageSpinner";
-import paginationLibrary from "../../lib/paginationLibrary";
+import paginationLibrary from "../../hooks/usePagination";
 import usePaginationResponse from "../../hooks/usePaginationResponse";
 import { IResponsePaginatedList } from "../../types/IResponse";
 import { useGenericState } from "../../hooks/useGenericState";
@@ -36,7 +36,7 @@ export const VogList = () => {
 
   const columns: IColumn<IVog>[] = [
     {
-      key: "id", 
+      key: "id",
       header: "Vog Id",
     },
     {
@@ -117,7 +117,7 @@ export const VogList = () => {
     isLoading,
     isError,
   } = useList<IResponsePaginatedList<IVog>>({
-    resource:  "vog/find/all",
+    resource: "vog/find/all",
     pagination: {
       current: paginationInstance.currentPage,
       pageSize: paginationInstance.pageSize,
@@ -141,7 +141,7 @@ export const VogList = () => {
   });
 
   usePaginationResponse<
-  IVog,
+    IVog,
     GetListResponse<IResponsePaginatedList<IVog>> | undefined
   >(response, paginationInstance);
   return (
@@ -168,8 +168,7 @@ export const VogList = () => {
 
       <Table<IVog>
         columns={columns}
-        rows={(
-          response?.data as unknown as IVog[]) || []}
+        rows={(response?.data as unknown as IVog[]) || []}
         paginationInstance={paginationInstance}
         isSearchable={true}
       />

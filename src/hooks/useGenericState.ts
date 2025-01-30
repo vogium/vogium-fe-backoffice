@@ -1,6 +1,7 @@
 import { BaseRecord } from "@refinedev/core";
 import React from "react";
 
+//Todo silinecek.. yerine useCommonStates kullanılacak..
 export function useGenericState<
   IClickedRow extends BaseRecord,
   IFormData = FormData

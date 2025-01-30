@@ -103,14 +103,15 @@
     "save": "Kaydet",
     "cancel": "İptal",
     "search": "Ara",
-    "logout": "Çıkış"
+    "logout": "Çıkış",
+    "updated": "düncellendi"
   },
   "buttons": {
     "submit": "Gönder",
     "create": "Create",
     "save": "Save",
     "logout": "Logout",
-    "delete": "Delete",
+    "delete": "Sil",
     "edit": "Edit",
     "cancel": "Cancel",
     "confirm": "Are you sure?",
@@ -137,8 +138,11 @@
     "deleteSuccess": "Başarıyla silindi",
     "deleteError": "Silme işlemi sırasında bir hata oluştu",
     "editSuccess": "Başarıyla düzenlendi",
+    "updateSuccess": "Başarıyla güncellendi",
     "editError": "Düzenleme işlemi sırasında bir hata oluştu",
-    "importProgress": "Importing: {{processed}}/{{total}}"
+    "importProgress": "Importing: {{processed}}/{{total}}",
+    "validationError": "Lütfen formunuzu kontrol ediniz",
+    "generalSuccess": "{{resource}} başarıyla {{action}}"
   },
   "loading": "Loading",
   "tags": {
@@ -179,11 +183,11 @@
     "default": "vogium",
     "suffix": " | Vogium",
     "users": {
-      "list": "Users | Vogium",
-      "show": "#{{id}} Show User | Vogium",
-      "edit": "#{{id}} Edit User | Vogium",
-      "create": "Create new User | Vogium",
-      "clone": "#{{id}} Clone User | Vogium"
+      "list": "Kullanıcılar | Vogium",
+      "show": "Kullanıcı Görüntüle | Vogium",
+      "edit": "Kullanıcı Düzenle | Vogium",
+      "create": "Yeni Kullanıcı Oluştur | Vogium",
+      "clone": "Kullanıcı Klonla | Vogium"
     }
   },
   "autoSave": {
@@ -198,8 +202,12 @@
       "tabs": {
         "profile": "Profil",
         "reports": "Şikayetler",
+        "statistics": "İstatistikler",
         "offers": "Teklifler",
-        "contracts": "Sözleşmeler"
+        "contracts": "Sözleşmeler",
+        "accounting": "Muhasebe",
+        "documents": "Belgeler",
+        "collaborations": "İşbirlikleri"
       },
       "groups": {
         "basicInformation": "Temel Bilgiler",
@@ -212,12 +220,10 @@
         "realname": "Ad",
         "username": "Kullanıcı Adı",
         "age": "Yaş",
-        "gender": "Cinsiyet",
+        "sex": "Cinsiyet",
         "terms": "Şartlar ve Koşullar",
         "phoneNumber": "Telefon Numarası",
         "emailAddress": "E-posta Adresi",
-        "male": "Erkek",
-        "female": "Kadın",
         "birthDate": "Doğum Günü",
         "country": "Ülke",
         "city": "Şehir",
@@ -255,7 +261,31 @@
         "reportDescription": "Şikayet İçeriği",
         "reportNote": "Şikayet Notu",
         "date": "Şikayet Tarihi",
-        "reportStatus": "Şikayet Durumu"
+        "reportStatus": "Şikayet Durumu",
+        "reported": "Şikayet Edilen",
+        "reporter": "Şikayet Eden"
+      }
+    },
+    "contracts": {
+      "name": "Sözleşmeler",
+      "fields": {
+        "startDate": "Başlangıç Tarihi",
+        "endDate": "Bitiş Tarihi",
+        "type": "Tür",
+        "status": "Durum",
+        "description": "Açıklama"
+      }
+    },
+    "offers": {
+      "name": "Teklifler",
+      "fields": {
+        "title": "Teklif Başlığı",
+        "description": "Teklif Açıklaması",
+        "documentUrl": "Teklif Belgesi",
+        "amount": "Teklif Fiyatı",
+        "status": "Teklif Durumu",
+        "startDate": "Başlangıç Tarihi",
+        "endDate": "Bitiş Tarihi"
       }
     },
     "blog_posts": {
@@ -269,10 +299,78 @@
     }
   },
   "enums": {
+    "sexes": {
+      "male": "Erkek",
+      "female": "Kadın",
+      "unknown": "Bilinmiyor"
+    },
+    "accountStatus": {
+      "user": "Kullanıcı",
+      "vogger": "Vogger",
+      "business": "İşletme"
+    },
+    "accountTypes": {
+      "user": "Kullanıcı",
+      "moderator": "Moderatör",
+      "admin": "Admin",
+      "superuser": "Superuser",
+      "developer": "Developer"
+    },
+    "userStatuses": {
+      "normal": "Normal",
+      "verified": "Doğrulanmış",
+      "vogger": "Vogger",
+      "business": "İşletme"
+    },
+    "userTypes": {
+      "basic": "Basic",
+      "plus": "Plus",
+      "prive": "Prive",
+      "elite": "Elite"
+    },
     "reportTypes": {
       "vog": "Vog",
       "comment": "Yorum",
-      "user": "User"
+      "user": "Kullanıcı"
+    },
+    "reportStatuses": {
+      "pending": "Beklemede",
+      "inReview": "İnceleniyor",
+      "resolved": "Çözüldü"
+    },
+    "reportTitles": {
+      "spam": "Spam",
+      "abuse": "Kötüye kullanım"
+    },
+    "reportDescriptions": {
+      "spam": "Bu kullanıcı platformun kurallarını kötüye kullanıyor veya uygunsuz davranış sergiliyor.",
+      "abuse": "Bu içerik sürekli olarak istenmeyen reklamlar veya spam mesajlar içeriyor. Bu içerik sürekli olarak istenmeyen reklamlar veya spam mesajlar içeriyor. Bu içerik sürekli olarak istenmeyen reklamlar veya spam mesajlar içeriyor."
+    },
+    "offerStatuses": {
+      "pending": "Beklemede",
+      "completed": "Tamamlandı",
+      "active": "Aktif"
+    },
+    "contractStatuses": {
+      "pending": "Beklemede",
+      "expired": "Tamamlandı",
+      "active": "Aktif"
+    },
+    "contractTypes": {
+      "vogger": "Vogger",
+      "usage": "Kullanım",
+      "agency": "Ajans",
+      "brand": "Marka",
+      "collaboration": "İşbirliği",
+      "sponsoredPost": "Sponsorlu Gönderi",
+      "campaign": "Kampanya"
+    }
+  },
+  "inputs": {
+    "document": {
+      "upload": "Dosya Yükle",
+      "uploadedSingle": "Dosya Yüklendi",
+      "uploadedMultiple": "Dosyalar Yüklendi"
     }
   }
 }
